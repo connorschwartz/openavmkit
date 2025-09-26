@@ -1099,6 +1099,11 @@ def calc_vif_recursive_drop(
         )
     first_run = None
     while True:
+        if X.shape[1] == 1:
+            vif_data = pd.DataFrame({'variable': [X.columns[0]], 'vif': [5]})
+            if first_run is None:
+                first_run = vif_data
+            break
         vif_data = calc_vif(X)
         if first_run is None:
             first_run = vif_data
